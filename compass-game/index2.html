@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Compass Game - Project 8</title>
+    <style>
+        .compass-container { display: table; margin: 20px 0; border-spacing: 15px; }
+        .compass-row { display: table-row; }
+        .compass-cell { display: table-cell; width: 50px; height: 50px; text-align: center; vertical-align: middle; font-size: 1.5rem; font-weight: bold; color: red; }
+        .diagonal { transform: rotate(-45deg); }
+        button { width: 45px; height: 45px; cursor: pointer; }
+        .dir-input { width: 25px; text-align: center; }
+        .italic-btn { font-style: italic; }
+        .no-js-warning { color: white; background-color: red; padding: 10px; text-align: center; }
+    </style>
+</head>
+<body>
+
+    <noscript>
+        <div class="no-js-warning">Warning: JavaScript is disabled. This page requires JavaScript to function.</div>
+    </noscript>
+
+    <h1>Compass Game</h1>
+    <p>The direction letters on the "compass" are scrambled. Press the arrows to properly position the direction letters.</p>
+
+    <div class="compass-container">
+        <div class="compass-row">
+            <div class="compass-cell"><button class="diagonal" onclick="swap('txt-top', 'txt-bottom')">↔</button></div>
+            <div class="compass-cell" id="txt-top">E</div>
+            <div class="compass-cell"><button class="diagonal" onclick="swap('txt-left', 'txt-right')">↔</button></div>
+        </div>
+        <div class="compass-row">
+            <div class="compass-cell" id="txt-left">S</div>
+            <div class="compass-cell"><button onclick="swap('txt-left', 'txt-right')">↔</button></div>
+            <div class="compass-cell" id="txt-right">N</div>
+        </div>
+        <div class="compass-row">
+            <div class="compass-cell" id="txt-bottom">W</div>
+            <div class="compass-cell"><button class="diagonal" onclick="swap('txt-top', 'txt-bottom')">↔</button></div>
+            <div class="compass-cell"></div>
+        </div>
+    </div>
+
+    <p>To restart the game, press <span class="italic-btn">Restart</span>, enter N, S, E, and W in any order in the boxes below, and then press <span class="italic-btn">Update</span>.</p>
+    
+    <button id="btn-restart" onclick="restart()">Restart</button>
+    <br><br>
+    Top: <input type="text" id="in-top" class="dir-input" maxlength="1" disabled>
+    Left: <input type="text" id="in-left" class="dir-input" maxlength="1" disabled>
+    Right: <input type="text" id="in-right" class="dir-input" maxlength="1" disabled>
+    Bottom: <input type="text" id="in-bottom" class="dir-input" maxlength="1" disabled>
+    <br><br>
+    <button id="btn-update" onclick="update()" disabled>Update</button>
+
+    <script>
+        function swap(id1, id2) {
+            const el1 = document.getElementById(id1);
+            const el2 = document.getElementById(id2);
+            const temp = el1.innerHTML;
+            el1.innerHTML = el2.innerHTML;
+            el2.innerHTML = temp;
+        }
+
+        function restart() {
+            document.getElementById('txt-top').innerHTML = "";
+            document.getElementById('txt-left').innerHTML = "";
+            document.getElementById('txt-right').innerHTML = "";
+            document.getElementById('txt-bottom').innerHTML = "";
+
+            const inputs = ['in-top', 'in-left', 'in-right', 'in-bottom'];
+            inputs.forEach(id => {
+                document.getElementById(id).disabled = false;
+                document.getElementById(id).value = "";
+            });
+            document.getElementById('btn-update').disabled = false;
+        }
+
+        function update() {
+            document.getElementById('txt-top').innerHTML = document.getElementById('in-top').value;
+            document.getElementById('txt-left').innerHTML = document.getElementById('in-left').value;
+            document.getElementById('txt-right').innerHTML = document.getElementById('in-right').value;
+            document.getElementById('txt-bottom').innerHTML = document.getElementById('in-bottom').value;
+
+            const inputs = ['in-top', 'in-left', 'in-right', 'in-bottom'];
+            inputs.forEach(id => document.getElementById(id).disabled = true);
+            document.getElementById('btn-update').disabled = true;
+        }
+    </script>
+</body>
+</html>
