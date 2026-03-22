@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<!-- 
+  File: sentencebuilder.html
+  Project: Sentence Builder (Chapter 9)
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentence Builder</title>
+    <style>
+        @font-face {
+            font-family: 'CursiveFont';
+            /* Ensure these filenames match your files in the /fonts folder */
+            src: url('fonts/yourfont.woff') format('woff'),
+                 url('fonts/yourfont.ttf') format('truetype');
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        #displayArea {
+            font-family: 'CursiveFont', cursive;
+            color: #B22222; /* Reddish color */
+            font-size: 2.5em; /* Largish text */
+            margin-bottom: 20px;
+            min-height: 1.2em;
+        }
+
+        .input-section {
+            margin-top: 20px;
+        }
+
+        input[type="text"] {
+            padding: 5px;
+            width: 200px;
+        }
+
+        button {
+            padding: 5px 15px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body onload="document.getElementById('wordInput').focus()">
+
+    <noscript>
+        <div style="color: red; font-weight: bold; border: 2px solid red; padding: 10px;">
+            Warning: This website requires JavaScript to be enabled to function correctly.
+        </div>
+    </noscript>
+
+    <div id="displayArea"></div>
+
+    <div class="input-section">
+        <form onsubmit="return false;">
+            <label id="inputLabel" for="wordInput">Starting word for your sentence:</label>
+            <input type="text" id="wordInput" autocomplete="off">
+            
+            <button type="button" id="addBtn" onclick="addWord()">Add Word</button>
+            <button type="button" id="startBtn" onclick="startOver()">Start Over</button>
+        </form>
+    </div>
+
+    <script>
+        // Global variable to track the full sentence
+        let sentenceState = "";
+
+        function addWord() {
+            const inputField = document.getElementById('wordInput');
+            const display = document.getElementById('displayArea');
+            const label = document.getElementById('inputLabel');
+            
+            // Local variable as required by instructions
+            let newWord = inputField.value.trim();
+
+            if (newWord !== "") {
+                if (sentenceState === "") {
+                    sentenceState = newWord;
+                } else {
+                    sentenceState += " " + newWord;
+                }
+                
+                display.innerText = sentenceState;
+                label.innerText = "Next word for your sentence:";
+                inputField.value = "";
+            }
+            
+            inputField.focus();
+        }
+
+        function startOver() {
+            const inputField = document.getElementById('wordInput');
+            const display = document.getElementById('displayArea');
+            const label = document.getElementById('inputLabel');
+
+            sentenceState = "";
+            display.innerText = "";
+            label.innerText = "Starting word for your sentence:";
+            inputField.value = "";
+            inputField.focus();
+        }
+    </script>
+</body>
+</html>
