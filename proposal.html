@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Renewable Energy Proposal Case Study</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            margin: 20px auto;
+            width: 90%;
+        }
+        th, td {
+            border: 1px solid #333;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #eee;
+            font-weight: bold;
+        }
+        form {
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        textarea {
+            vertical-align: top;
+            padding: 5px;
+            margin-top: 10px;
+        }
+        .consumption-input {
+            margin: 5px;
+            text-align: center;
+        }
+        button {
+            font-size: 1.1em;
+            padding: 10px 20px;
+            margin: 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h3>Renewable Energy Proposal</h3>
+    </header>
+
+    <form id="proposalForm">
+        <table>
+            <caption>Installation Cost and Capacity</caption>
+            <thead>
+                <tr>
+                    <th>Component</th>
+                    <th>Description</th>
+                    <th>Size</th>
+                    <th>Max KW</th>
+                    <th>Cost ($)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Solar Generator</td>
+                    <td>M<sup>2</sup> Panel Area</td>
+                    <td><input type="text" id="sizeSC" size="3" style="text-align: right;"></td>
+                    <td><input type="text" id="maxKW_SC" size="3"></td>
+                    <td><input type="text" id="costSC" size="5"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <br>
+        <p>Last year's cumulative monthly electrical consumption (kWh):</p>
+        <input type="text" id="Jan" placeholder="Jan" size="2" class="consumption-input">
+        <input type="text" id="Feb" placeholder="Feb" size="2" class="consumption-input">
+        <input type="text" id="Mar" placeholder="Mar" size="2" class="consumption-input">
+        <input type="text" id="Apr" placeholder="Apr" size="2" class="consumption-input">
+        <input type="text" id="May" placeholder="May" size="2" class="consumption-input">
+        <input type="text" id="Jun" placeholder="Jun" size="2" class="consumption-input">
+        <input type="text" id="Jul" placeholder="Jul" size="2" class="consumption-input">
+        <input type="text" id="Aug" placeholder="Aug" size="2" class="consumption-input">
+        <input type="text" id="Sep" placeholder="Sep" size="2" class="consumption-input">
+        <input type="text" id="Oct" placeholder="Oct" size="2" class="consumption-input">
+        <input type="text" id="Nov" placeholder="Nov" size="2" class="consumption-input">
+        <input type="text" id="Dec" placeholder="Dec" size="2" class="consumption-input">
+
+        <br><br>
+        <label>Daily Start Hour: <input type="text" id="hour1" size="2"></label>
+        <label>Finish Hour: <input type="text" id="hour2" size="2"></label>
+
+        <br><br>
+        <label>Heating Source: 
+            <select id="heating">
+                <option value="none">None</option>
+                <option value="electric">Electric</option>
+                <option value="gas">Gas</option>
+                <option value="other">Other</option>
+            </select>
+        </label>
+
+        <br><br>
+        <label>Company Name and Address:<br>
+            <textarea id="name" rows="5" cols="50" placeholder="Enter full address here..."></textarea>
+        </label>
+
+        <br><br>
+        <button type="button" onclick="evaluateProposal(this.form)">Submit Proposal</button>
+    </form>
+
+    <h3 id="status" style="color: green;"></h3>
+
+    <script>
+        /**
+         * Function: evaluateProposal
+         * Description: Processes the form data and updates the UI status.
+         * @param {Object} form - The form object containing input elements.
+         */
+        function evaluateProposal(form) {
+            // Update the status message in the DOM
+            document.getElementById("status").innerText = "Status: Proposal Submitted";
+
+            // Map form values to variables using parseFloat for numerical data
+            var costSC_Val = parseFloat(document.getElementById("costSC").value);
+            var sizeSC_Val = parseFloat(document.getElementById("sizeSC").value);
+            var companyInfo = document.getElementById("name").value;
+
+            // Log values to console for verification
+            console.log("Processing Submission...");
+            console.log("Cost Variable:", costSC_Val);
+            console.log("Size Variable:", sizeSC_Val);
+            console.log("Company Info:", companyInfo);
+
+            // Simple notification to user
+            alert("Submission received for: " + companyInfo);
+        }
+    </script>
+
+</body>
+</html>
