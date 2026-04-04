@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Program Explanation: Temperature Converter</title>
+</head>
+<body>
+
+  <h1>Temperature Converter Program</h1>
+
+  <p>
+    This page explains a <strong>Temperature Converter</strong> program written in Python.
+    The program converts a temperature value from Celsius to Fahrenheit using a simple
+    mathematical formula. This type of program is a classic example used in introductory
+    <abbr title="Computer Science">CS</abbr> courses because it demonstrates variables,
+    arithmetic operations, and output in a clear and practical way.
+  </p>
+
+  <h2>The Program</h2>
+  <p>Below is the complete Temperature Converter program:</p>
+
+  <pre><code>celsius = float(input("Enter temperature in Celsius: "))
+fahrenheit = (celsius * 9/5) + 32
+print("Temperature in Fahrenheit:", fahrenheit)</code></pre>
+
+  <h2>How the Program Works</h2>
+
+  <p>
+    The key variable is <var>celsius</var>, which stores the user's input.
+    A second variable, <var>fahrenheit</var>, stores the converted result.
+    The <code>float()</code> function converts the input to a decimal number.
+  </p>
+
+  <h2>The Formula</h2>
+  <p><strong>F = (C &times; 9/5) + 32</strong></p>
+  <p>
+    For example, entering <samp>100</samp> (boiling point of water) outputs:
+  </p>
+  <p><samp>Temperature in Fahrenheit: 212.0</samp></p>
+
+  <h2>Sample Output</h2>
+  <pre><samp>Enter temperature in Celsius: 0
+Temperature in Fahrenheit: 32.0</samp></pre>
+
+  <h2>Key Concepts</h2>
+  <ul>
+    <li><strong>Variables</strong> &mdash; <var>celsius</var> and <var>fahrenheit</var></li>
+    <li><strong>User Input</strong> &mdash; <code>input()</code> function</li>
+    <li><strong>Arithmetic</strong> &mdash; math operations to convert the value</li>
+    <li><strong>Output</strong> &mdash; <code>print()</code> function</li>
+    <li><strong>Type Conversion</strong> &mdash; <code>float()</code> for decimal values</li>
+  </ul>
+
+  <h2>Why This Program Is Useful</h2>
+  <p>
+    The <abbr title="United States">US</abbr> uses Fahrenheit while most of the world
+    uses Celsius. This converter solves a real everyday problem.
+    According to <cite>Web Programming with HTML, CSS, and JavaScript</cite>
+    by John Dean, understanding input and output is a foundational skill for all developers.
+  </p>
+
+  <blockquote>
+    "First, solve the problem. Then, write the code."
+    <br>&mdash; John Johnson
+  </blockquote>
+
+  <h2>Conclusion</h2>
+  <p>
+    This program takes user input, applies a formula using <var>celsius</var> and
+    <var>fahrenheit</var>, and displays the result. It is a simple but complete
+    example of how programs work.
+  </p>
+
+  <hr>
+  <small>Web Programming with HTML, CSS, and JavaScript &mdash; Chapter 2 Project</small>
+
+</body>
+</html>
