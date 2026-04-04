@@ -1,1 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer Order Form</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin: 20px auto;
+            font-family: Arial, sans-serif;
+        }
+        caption {
+            font-size: 1.5em;
+            font-weight: bold;
+            padding: 15px;
+        }
+        th, td {
+            border: 1px solid #000;
+            padding: 10px;
+            height: 25px;
+        }
+        .label-cell {
+            background-color: #eee;
+            font-weight: bold;
+            width: 25%;
+        }
+        .black-bar {
+            background-color: #000;
+            height: 30px;
+        }
+        .right-align {
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
 
+    <table>
+        <caption>Customer Order Form</caption>
+        <tr>
+            <td class="label-cell">Order Number</td>
+            <td colspan="3"></td>
+        </tr>
+        <tr>
+            <td class="label-cell">Order Date</td>
+            <td colspan="3"></td>
+        </tr>
+        <tr>
+            <th class="label-cell">Product Name</th>
+            <th class="label-cell">Color</th>
+            <th class="label-cell">Quantity</th>
+            <th class="label-cell">Price</th>
+        </tr>
+        <tr><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td></tr>
+        <tr>
+            <td colspan="4" class="black-bar"></td>
+        </tr>
+        <tr>
+            <td colspan="3" class="label-cell right-align">Subtotal</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td colspan="3" class="label-cell right-align">Tax</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td colspan="3" class="label-cell right-align">Shipping</td>
+            <td class="right-align">$ 5.95</td>
+        </tr>
+        <tr>
+            <td colspan="3" class="label-cell right-align">Total</td>
+            <td></td>
+        </tr>
+    </table>
+
+</body>
+</html>
