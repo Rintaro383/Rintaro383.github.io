@@ -104,32 +104,34 @@
 <table>
   <tr>
     <td><label for="fullName">Full name:</label></td>
-    <td><input type="text" id="fullName" required></td>
+    <td><input type="text" id="fullName"></td>
   </tr>
   <tr>
     <td><label for="username">Username:</label></td>
-    <td><input type="text" id="username" required></td>
+    <td><input type="text" id="username"></td>
   </tr>
   <tr>
     <td><label for="password">Password:</label></td>
-    <td><input type="password" id="password" required></td>
+    <td><input type="password" id="password"></td>
   </tr>
   <tr>
     <td><label for="email">Email address:</label></td>
-    <td><input type="email" id="email" required></td>
+    <td><input type="email" id="email"></td>
   </tr>
   <tr>
     <td><label for="phone">Phone number:</label></td>
     <td>
-      <input type="tel" id="phone" required
+      <input type="tel" id="phone"
              placeholder="123-456-7890"
              pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
     </td>
   </tr>
   <tr>
-    <td style="vertical-align:top; padding-top:7px;"><label for="securityQ">Security questions:</label></td>
+    <td style="vertical-align:top; padding-top:7px;">
+      <label for="securityQ">Security questions:</label>
+    </td>
     <td>
-      <select id="securityQ" multiple required>
+      <select id="securityQ" multiple>
         <option>At what age did your childhood pet run away?</option>
         <option>What was the name of your favorite unpaid internship?</option>
         <option>What is the maiden name of your best friend's maternal grandmother?</option>
@@ -208,7 +210,7 @@
   }
 
   function handleReset() {
-    const fields = ["fullName","username","password","email","phone"];
+    const fields = ["fullName", "username", "password", "email", "phone"];
     fields.forEach(id => {
       const el = document.getElementById(id);
       el.value = "";
