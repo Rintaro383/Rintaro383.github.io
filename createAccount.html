@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Account</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 16px;
+      background: #f0f0f0;
+      padding: 30px;
+    }
+
+    h1 {
+      font-size: 2em;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+
+    p.intro {
+      margin-bottom: 20px;
+      font-size: 0.95em;
+    }
+
+    table {
+      border-collapse: collapse;
+    }
+
+    td {
+      padding: 5px 8px;
+      vertical-align: middle;
+    }
+
+    td:first-child {
+      text-align: right;
+      font-size: 0.95em;
+    }
+
+    input[type="text"],
+    input[type="password"],
+    input[type="email"],
+    input[type="tel"] {
+      width: 200px;
+      padding: 3px 5px;
+      font-size: 0.95em;
+      border: 1px solid #999;
+    }
+
+    select {
+      width: 450px;
+      height: 120px;
+      font-size: 0.9em;
+      border: 1px solid #999;
+    }
+
+    input.valid, select.valid {
+      background-color: #ccffcc;
+    }
+
+    input.invalid, select.invalid {
+      background-color: #ffcccc;
+    }
+
+    .btn-row {
+      margin-top: 12px;
+    }
+
+    button {
+      padding: 4px 14px;
+      font-size: 0.95em;
+      margin-right: 6px;
+      cursor: pointer;
+    }
+
+    #message {
+      margin-top: 16px;
+      font-size: 0.95em;
+      line-height: 1.7;
+    }
+
+    #message .error {
+      color: red;
+      font-weight: bold;
+    }
+
+    #message .review-label {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Create an Account</h1>
+<p class="intro">All fields are required. Enter appropriate values in the text boxes.
+  Select one or more security questions. Then click the Done button to review your choices.</p>
+
+<table>
+  <tr>
+    <td><label for="fullName">Full name:</label></td>
+    <td><input type="text" id="fullName" required></td>
+  </tr>
+  <tr>
+    <td><label for="username">Username:</label></td>
+    <td><input type="text" id="username" required></td>
+  </tr>
+  <tr>
+    <td><label for="password">Password:</label></td>
+    <td><input type="password" id="password" required></td>
+  </tr>
+  <tr>
+    <td><label for="email">Email address:</label></td>
+    <td><input type="email" id="email" required></td>
+  </tr>
+  <tr>
+    <td><label for="phone">Phone number:</label></td>
+    <td>
+      <input type="tel" id="phone" required
+             placeholder="123-456-7890"
+             pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
+    </td>
+  </tr>
+  <tr>
+    <td style="vertical-align:top; padding-top:7px;"><label for="securityQ">Security questions:</label></td>
+    <td>
+      <select id="securityQ" multiple required>
+        <option>At what age did your childhood pet run away?</option>
+        <option>What was the name of your favorite unpaid internship?</option>
+        <option>What is the maiden name of your best friend's maternal grandmother?</option>
+        <option>What is the name of your favorite canceled TV show?</option>
+        <option>On what street did you lose your childlike sense of wonder?</option>
+        <option>What are you wearing?</option>
+        <option>What sports team do you fetishize to avoid meaningful discussion with others?</option>
+        <option>In what year did you stop trying?</option>
+      </select>
+    </td>
+  </tr>
+</table>
+
+<div class="btn-row">
+  <button onclick="handleDone()">Done</button>
+  <button onclick="handleReset()">Reset</button>
+</div>
+
+<div id="message"></div>
+
+<script>
+  function validateField(el) {
+    if (el.tagName === "SELECT") {
+      const valid = el.selectedOptions.length > 0;
+      el.className = valid ? "valid" : "invalid";
+      return valid;
+    }
+
+    const val = el.value.trim();
+    let valid = false;
+
+    if (el.id === "email") {
+      valid = val.length > 0 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
+    } else if (el.id === "phone") {
+      valid = /^[0-9]{3}-[0-9]{3}-[0-9]{4}$/.test(val);
+    } else {
+      valid = val.length > 0;
+    }
+
+    el.className = valid ? "valid" : "invalid";
+    return valid;
+  }
+
+  function handleDone() {
+    const fullName = document.getElementById("fullName");
+    const username = document.getElementById("username");
+    const password = document.getElementById("password");
+    const email    = document.getElementById("email");
+    const phone    = document.getElementById("phone");
+    const secQ     = document.getElementById("securityQ");
+
+    const fields = [fullName, username, password, email, phone, secQ];
+    let allValid = true;
+
+    fields.forEach(f => {
+      if (!validateField(f)) allValid = false;
+    });
+
+    const msgDiv = document.getElementById("message");
+
+    if (!allValid) {
+      msgDiv.innerHTML = '<span class="error">Invalid input - please correct the highlighted fields.</span>';
+    } else {
+      const selectedQs = Array.from(secQ.selectedOptions).map(o => o.text);
+
+      msgDiv.innerHTML =
+        '<span class="review-label">Review your entries:</span><br>' +
+        'Name: ' + fullName.value + '<br>' +
+        'Username: ' + username.value + '<br>' +
+        'Password: ' + password.value + '<br>' +
+        'Email address: ' + email.value + '<br>' +
+        'Phone number: ' + phone.value + '<br>' +
+        '<span class="review-label">Security questions:</span><br>' +
+        selectedQs.join('<br>');
+    }
+  }
+
+  function handleReset() {
+    const fields = ["fullName","username","password","email","phone"];
+    fields.forEach(id => {
+      const el = document.getElementById(id);
+      el.value = "";
+      el.className = "";
+    });
+
+    const secQ = document.getElementById("securityQ");
+    for (let opt of secQ.options) opt.selected = false;
+    secQ.className = "";
+
+    document.getElementById("message").innerHTML = "";
+  }
+</script>
+
+</body>
+</html>
