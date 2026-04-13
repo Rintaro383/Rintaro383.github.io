@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Ordering</title>
+  <script src="wordOrdering.js"></script>
+</head>
+<body>
+  <h1>Word Ordering</h1>
+  <p><strong>Enter a list of words separated by spaces.</strong></p>
+  <p>
+    Word list: <input type="text" id="wordInput" size="40">
+  </p>
+  <p>
+    <input type="button" value="Alphabetical" onclick="sortWords('alpha')">
+    <input type="button" value="Reverse alphabetical" onclick="sortWords('reverse')">
+    <input type="button" value="Random" onclick="sortWords('random')">
+  </p>
+  <p id="message"></p>
+</body>
+</html>
