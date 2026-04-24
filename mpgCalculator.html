@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MPG Calculator</title>
+    <style>
+        /* Easy CSS to make it look clean */
+        body { font-family: sans-serif; padding: 20px; }
+        .row { margin-bottom: 12px; }
+        label { display: inline-block; width: 230px; }
+        input[disabled] { background-color: #eeeeee; }
+    </style>
+</head>
+<body>
+
+    <h1>Miles Per Gallon Calculator</h1>
+    <p>The next two times you go to the gas station, fill up your tank completely and record your odometer's mileage values. At the second fill-up, record the number of gallons purchased. Then enter your three recorded values below and click the <i>Calculate</i> button.</p>
+
+    <div class="row">
+        <label for="m1">First odometer reading (in miles):</label>
+        <input type="number" id="m1" min="0" max="400000">
+    </div>
+
+    <div class="row">
+        <label for="m2">Second odometer reading (in miles):</label>
+        <input type="number" id="m2" min="0" max="400000">
+    </div>
+
+    <div class="row">
+        <label for="gal">Gallons:</label>
+        <input type="number" id="gal" min="0.1" max="40" step="0.1">
+    </div>
+
+    <div class="row">
+        <label for="res">Calculated MPG:</label>
+        <input type="text" id="res" disabled>
+    </div>
+
+    <button id="btnCalc">Calculate</button>
+    <button id="btnReset">Reset</button>
+
+    <script>
+        const btnCalc = document.getElementById('btnCalc');
+        const btnReset = document.getElementById('btnReset');
+
+        btnCalc.onclick = function() {
+            // Get all input boxes
+            const box1 = document.getElementById('m1');
+            const box2 = document.getElementById('m2');
+            const boxG = document.getElementById('gal');
+            const boxR = document.getElementById('res');
+
+            // Change values to numbers
+            const v1 = parseFloat(box1.value);
+            const v2 = parseFloat(box2.value);
+            const vG = parseFloat(boxG.value);
+
+            let msg = "";
+
+            // Check first number
+            if (isNaN(v1) || v1 < box1.min || v1 > box1.max) {
+                msg += "Invalid entry for the first odometer reading. Must be an integer between 0 and 400000.\n\n";
+            }
+
+            // Check second number
+            if (isNaN(v2) || v2 < box2.min || v2 > box2.max) {
+                msg += "Invalid entry for the second odometer reading. Must be an integer between 0 and 400000.\n\n";
+            }
+
+            // Check if first is larger (from your last photo)
+            if (!isNaN(v1) && !isNaN(v2) && v1 > v2) {
+                msg += "Invalid odometer entries. The first value cannot be greater than the second value.\n\n";
+            }
+
+            // Check gallons
+            if (isNaN(vG) || vG < boxG.min || vG > boxG.max) {
+                msg += "Invalid entry for gallons. Must be between .1 and 40 with a maximum of one decimal place.\n\n";
+            }
+
+            // If there is an error, show alert
+            if (msg !== "") {
+                boxR.value = ""; 
+                alert(msg);
+            } else {
+                // Calculation
+                const mpg = (v2 - v1) / vG;
+                boxR.value = mpg.toFixed(1); // One decimal place
+            }
+        };
+
+        // Reset all
+        btnReset.onclick = function() {
+            box1.value = ""; // もしエラーが出たらここをdocument.getElementById('m1').valueに変えてね
+            document.getElementById('m1').value = "";
+            document.getElementById('m2').value = "";
+            document.getElementById('gal').value = "";
+            document.getElementById('res').value = "";
+        };
+    </script>
+
+</body>
+</html>
